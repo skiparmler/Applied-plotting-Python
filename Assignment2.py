@@ -35,12 +35,12 @@ df1.index =range(365)
 df2.index =range(365)
 df3.index =range(365)
 df4.index =range(365)
-
 df3[df3>df2]=np.nan
 df4[df4<df1]=np.nan
-   
+observation_dates = np.arange('2015-01-01', '2016-01-01', dtype='datetime64[D]')   
 
 import matplotlib.pyplot as plt
+fig_size = plt.rcParams["figure.figsize"]
 fig_size[0] = 12
 fig_size[1] = 9
 
@@ -55,14 +55,17 @@ maxV15.columns = ['maximum 2015']
 minV15.columns = ['minimum 2015']
 minV.renames = "hej"
 plt.figure()
-plt.plot(maxV, '-', minV, '-')
-plt.fill_between(range(365), minV, maxV, facecolor='blue', alpha=0.25)
-plt.scatter(range(365), minV15)
-plt.scatter(range(365), maxV15)
+#plt.plot(observation_dates,maxV, '-', observation_dates, minV, '-')
+plt.plot(observation_dates,maxV, '-', label = "Max Temperature")
+plt.plot(observation_dates, minV, '-', label = "Min Temperature")
+plt.fill_between(observation_dates, minV, maxV, facecolor='blue', alpha=0.25)
+plt.scatter(observation_dates, minV15, label = '2015 temperature')
+plt.scatter(observation_dates, maxV15, label = '2015 temperature')
 plt.ylabel('Temperature')
 plt.xlabel('Day of the year')
-plt.title('Record of high and low temperatures by day of the year')
+plt.title('Record of high and low temperatures by day of the year 2005-2014')
 plt.legend(loc="upper left", bbox_to_anchor=[0, 1], ncol=2, shadow=True, title="Legend", fancybox=True)
+#Did not manage to change the xtick labels to get rid of the year.
 
 
 
